@@ -5,9 +5,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url('./background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  overflow: hidden; 
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --bs-purple: #6f42c1; /* Фиолетовый цвет */
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-purple) !important;
+  --bs-btn-border-color: var(--bs-purple) !important;
+  --bs-btn-hover-bg: #5a32a3 !important;
+  --bs-btn-hover-border-color: #5a32a3 !important;
+  --bs-btn-active-bg: #5a32a3 !important;
+  --bs-btn-active-border-color: #5a32a3 !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Тень */
+  transition: box-shadow 0.3s ease; /* Плавный переход */
+}
+
+.btn-primary:hover {
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5); /* Увеличение тени при наведении */
+}
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+
