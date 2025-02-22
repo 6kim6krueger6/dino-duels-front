@@ -158,7 +158,7 @@ function Main() {
             }}
           />
         </div>
-
+        <a href="https://sepolia.etherscan.io/address/0xb70d4333545BB648bDFA4B30DE9d13B12Ec3F6a8" target="_blank" rel="noopener noreferrer">View on etherscan</a>
         {errorMessage && (
           <div
             style={{
