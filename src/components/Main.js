@@ -125,6 +125,7 @@ function Main() {
     <h1 className="mt-2">Gm, DinadsBro!</h1>
     <p className="lead mt-2" style={{ wordWrap: "break-word" }}>
       Connect the wallet and press the mint button to collect your NFT!
+      Make sure you are on Sepolia testnet.
     </p>
 
     <div
