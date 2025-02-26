@@ -1,9 +1,9 @@
 import logo from "./logo.png";
-import { contractAddress, abi } from "./Constants";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { addressMon, abiMon } from "./ConstantsMon";
 
 function Main() {
   const [ethAmount, setEthAmount] = useState("");
@@ -40,7 +40,7 @@ function Main() {
   useEffect(() => {
     if (typeof window.ethereum !== "undefined") {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contract = new ethers.Contract(contractAddress, abi, provider);
+      const contract = new ethers.Contract(addressMon, abiMon, provider);
 
       contract.on("CreatedNFT", (tokenId, minter, tokenUri) => {
         alert(`🎉 NFT successfully minted! Token ID: ${tokenId}`);
@@ -61,7 +61,7 @@ function Main() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner();
-      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const contract = new ethers.Contract(addressMon, abiMon, signer);
 
       try {
         console.log("Processing...");
@@ -81,7 +81,7 @@ function Main() {
 
         if (error.error && error.error.data) {
           const errorData = error.error.data;
-          const iface = new ethers.utils.Interface(abi);
+          const iface = new ethers.utils.Interface(abiMon);
 
           try {
             const decodedError = iface.parseError(errorData);
@@ -104,97 +104,95 @@ function Main() {
   };
 
   return (
-    
-<div className="d-flex justify-content-center align-items-center vh-100">
-  <div
-    className="p-3 border rounded-5 shadow-lg text-center bg-white bg-opacity-80"
-    style={{
-      width: "400px",
-      maxWidth: "90%",
-      marginBottom: "20px",
-      position: "relative",
-      minHeight: "500px",
-    }}
-  >
-    <img
-      src={logo}
-      className="img-fluid rounded-circle"
-      style={{ width: "180px", height: "180px" }}
-      alt="DinadImg"
-    />
-    <h1 className="mt-2">Gm, DinadsBro!</h1>
-    <p className="lead mt-2" style={{ wordWrap: "break-word" }}>
-      Connect the wallet and press the mint button to collect your NFT!
-      Make sure you are on Sepolia testnet.
-    </p>
-
-    <div
-      style={{
-        fontSize: "1.2rem",
-        fontWeight: "bold",
-        margin: "10px 0",
-        color: "#6c63ff",
-      }}
-    >
-      🕰️ {timeLeft}
-    </div>
-
-    <div style={{ width: "100px", margin: "0 auto" }}>
-      <button className="btn btn-primary w-100" onClick={mintNFT} disabled={isLoading}>
-        {isLoading ? (
-          <div className="spinner"></div>
-        ) : (
-          "Mint"
-        )}
-      </button>
-
-      <input
-        type="text"
-        className="form-control mt-3 text-center"
-        placeholder="Enter ETH"
-        value={ethAmount}
-        onChange={(e) => {
-          const value = e.target.value;
-          if (/^\d*\.?\d*$/.test(value)) {
-            setEthAmount(value);
-          }
-        }}
-      />
-    </div>
-
-    {/* Кнопка для перехода в X */}
-    <a
-      href="https://x.com/DinoDuels" // Замените на ваш профиль в X
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        position: "absolute",
-        bottom: "10px",
-        right: "10px",
-        fontSize: "1.5rem",
-        color: "#000", // Цвет иконки
-        textDecoration: "none",
-      }}
-    >
-      <FontAwesomeIcon icon={faXTwitter} />
-    </a>
-
-    <a href="https://sepolia.etherscan.io/address/0xb70d4333545BB648bDFA4B30DE9d13B12Ec3F6a8" target="_blank" rel="noopener noreferrer">View on etherscan</a>
-    {errorMessage && (
+    <div className="d-flex justify-content-center align-items-center vh-100">
       <div
+        className="p-3 border rounded-5 shadow-lg text-center bg-white bg-opacity-80"
         style={{
-          marginTop: "20px",
-          color: "red",
-          fontSize: "0.9rem",
-          textAlign: "center",
-          width: "100%",
+          width: "400px",
+          maxWidth: "90%",
+          marginBottom: "20px",
+          position: "relative",
+          minHeight: "500px",
         }}
       >
-        {errorMessage}
+        <img
+          src={logo}
+          className="img-fluid rounded-circle"
+          style={{ width: "180px", height: "180px" }}
+          alt="DinadImg"
+        />
+        <h1 className="mt-2">Gm, DinadsBro!</h1>
+        <p className="lead mt-2" style={{ wordWrap: "break-word" }}>
+          Connect the wallet and press the mint button to collect your NFT!
+          Make sure you are on Sepolia testnet.
+        </p>
+
+        <div
+          style={{
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            margin: "10px 0",
+            color: "#6c63ff",
+          }}
+        >
+          🕰️ {timeLeft}
+        </div>
+
+        <div style={{ width: "100px", margin: "0 auto" }}>
+          <button className="btn btn-primary w-100" onClick={mintNFT} disabled={isLoading}>
+            {isLoading ? (
+              <div className="spinner"></div>
+            ) : (
+              "Mint"
+            )}
+          </button>
+
+          <input
+            type="text"
+            className="form-control mt-3 text-center"
+            placeholder="Enter ETH"
+            value={ethAmount}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^\d*\.?\d*$/.test(value)) {
+                setEthAmount(value);
+              }
+            }}
+          />
+        </div>
+
+        <a
+          href="https://x.com/DinoDuels"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            position: "absolute",
+            bottom: "10px",
+            right: "10px",
+            fontSize: "1.5rem",
+            color: "#000",
+            textDecoration: "none",
+          }}
+        >
+          <FontAwesomeIcon icon={faXTwitter} />
+        </a>
+
+        <a href="https://sepolia.etherscan.io/address/0xb70d4333545BB648bDFA4B30DE9d13B12Ec3F6a8" target="_blank" rel="noopener noreferrer">View on etherscan</a>
+        {errorMessage && (
+          <div
+            style={{
+              marginTop: "20px",
+              color: "red",
+              fontSize: "0.9rem",
+              textAlign: "center",
+              width: "100%",
+            }}
+          >
+            {errorMessage}
+          </div>
+        )}
       </div>
-    )}
-  </div>
-</div>
+    </div>
   );
 }
 
