@@ -6,7 +6,6 @@ import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { addressMon, abiMon } from "./ConstantsMon";
 
 function Main() {
-  const [ethAmount, setEthAmount] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [timeLeft, setTimeLeft] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -65,9 +64,7 @@ function Main() {
 
       try {
         console.log("Processing...");
-        const transaction = await contract.safeMint({
-          value: ethers.utils.parseEther(ethAmount || "0.01"),
-        });
+        const transaction = await contract.safeMint(); // Убрано значение value
         await transaction.wait(1);
       } catch (error) {
         console.error("Transaction failed:", error);
@@ -124,7 +121,7 @@ function Main() {
         <h1 className="mt-2">Gm, DinadsBro!</h1>
         <p className="lead mt-2" style={{ wordWrap: "break-word" }}>
           Connect the wallet and press the mint button to collect your NFT!
-          Make sure you are on Sepolia testnet.
+          Make sure you are on Monad testnet.
         </p>
 
         <div
@@ -146,19 +143,6 @@ function Main() {
               "Mint"
             )}
           </button>
-
-          <input
-            type="text"
-            className="form-control mt-3 text-center"
-            placeholder="Enter ETH"
-            value={ethAmount}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (/^\d*\.?\d*$/.test(value)) {
-                setEthAmount(value);
-              }
-            }}
-          />
         </div>
 
         <a
@@ -177,7 +161,7 @@ function Main() {
           <FontAwesomeIcon icon={faXTwitter} />
         </a>
 
-        <a href="https://sepolia.etherscan.io/address/0xb70d4333545BB648bDFA4B30DE9d13B12Ec3F6a8" target="_blank" rel="noopener noreferrer">View on etherscan</a>
+        <a href="https://testnet.monadexplorer.com/address/0x1e25FA098261C2C317E8Da868C8659daF1f3E1D6?tab=Contract" target="_blank" rel="noopener noreferrer">View monad explorer</a>
         {errorMessage && (
           <div
             style={{
